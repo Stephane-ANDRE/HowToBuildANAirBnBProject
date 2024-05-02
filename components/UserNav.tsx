@@ -1,10 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 import { MenuIcon } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import {RegisterLink, LoginLink, LogoutLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 
 
-export function UserNav () {
+export async function UserNav () {
+    const { getUser} = getKindeServerSession();
+    const user = await getUser ();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -21,19 +25,31 @@ export function UserNav () {
                 ">
                     <MenuIcon className="w-6 h-6 lg:w-5 lg:h-5" />
                         <img
-                        src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"                         
+                        src={
+                            user?.picture ?? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
+                        }                         
                         alt="user image" 
                         className="rounded-full h-10 w-10 hidden lg:block"
                         />
                 </div>
             </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[200px]">
-                    <DropdownMenuItem>
+                    {user ? (
+                         <> 
+                     <DropdownMenuItem>
+                         <LogoutLink className="w-full">Se déconnecter</LogoutLink>
+                     </DropdownMenuItem>
+                         </>
+                    ): (
+                        <> 
+                        <DropdownMenuItem>
                         <RegisterLink className="w-full">S'enregistrer</RegisterLink>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                         <LoginLink className="w-full">Se connecter</LoginLink>
                     </DropdownMenuItem>
+                        </>
+                    )}
                 </DropdownMenuContent>
         </DropdownMenu>
     )
