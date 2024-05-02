@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { MenuIcon } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import {RegisterLink, LoginLink, LogoutLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import Link from "next/link";
 
 
 
@@ -35,7 +36,27 @@ export async function UserNav () {
             </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[200px]">
                     {user ? (
-                         <> 
+                         <>
+                         <DropdownMenuItem>
+                         <form className="w-full">
+                            <button type="submit" className="w-full text-start">
+                                AirchezBibi..: ta maison
+                            </button>
+                         </form>
+                         </DropdownMenuItem>
+                         <DropdownMenuItem>
+                         <Link href="/my-homes" className="w-full">Mes envies
+                         </Link>
+                         </DropdownMenuItem>
+                         <DropdownMenuItem>
+                         <Link href="/my-favorites" className="w-full">Mes favories
+                         </Link>
+                         </DropdownMenuItem>
+                         <DropdownMenuItem>
+                         <Link href="/reservations" className="w-full">Mes réservations
+                         </Link>
+                         </DropdownMenuItem>
+                         <DropdownMenuSeparator />
                      <DropdownMenuItem>
                          <LogoutLink className="w-full">Se déconnecter</LogoutLink>
                      </DropdownMenuItem>
