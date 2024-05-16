@@ -1,4 +1,4 @@
-import { createCategoryPage } from "@/app/action";
+import { createCategoryPage } from "@/app/actions";
 import CreationBottomBar from "@/components/CreationBottomBar";
 import { SelectedCategory } from "@/components/SelectedCategory";
 

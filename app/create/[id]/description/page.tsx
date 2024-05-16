@@ -1,4 +1,4 @@
-import { CreateDescription } from "@/app/action";
+import { CreateDescription } from "@/app/actions";
 import { Counter } from "@/components/Counter";
 import CreationBottomBar from "@/components/CreationBottomBar";
 import { Card, CardHeader } from "@/components/ui/card";
@@ -23,7 +23,7 @@ export default function DescriptionPage({params}:{params: {id: string}}) {
                 </div>
                 <div className="flex flex-col gap-y-2">
                     <Label>Description de ta case</Label>
-                   <Textarea name="descrition" required placeholder="Décris ta case s'il te plait..."/>
+                   <Textarea name="description" required placeholder="Décris ta case s'il te plait..."/>
                 </div>
                 <div className="flex flex-col gap-y-2">
                     <Label>Prix de ta case</Label>

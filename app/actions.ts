@@ -4,8 +4,7 @@ import prisma from "./lib/db";
 import { redirect } from "next/navigation";
 import { supabase } from "./lib/supabase";
 
-/**
- * Creates a new Air Chez Bibi home or redirects to the creation flow if necessary.
+ /* Creates a new Air Chez Bibi home or redirects to the creation flow if necessary.
  * 
  * @param {object} obj - An object containing the userId
  * @param {string} obj.userId - The ID of the user creating the home
@@ -43,7 +42,25 @@ export async function createAirChezBibiHome({userId}:{userId:string}) {
     } 
     else if (data.addedCategory &&!data.addedDescription) {
         return redirect(`/create/${data.id}/description`);
-    }
+    } else if (
+        data.addedCategory &&
+        data.addedDescription &&
+        !data.addedLocation
+      ) {
+        return redirect(`/create/${data.id}/address`);
+      } else if (
+        data.addedCategory &&
+        data.addedDescription &&
+        data.addedLocation
+      ) {
+        const data = await prisma.home.create({
+          data: {
+            userId: userId,
+          },
+        });
+    
+        return redirect(`/create/${data.id}/structure`);
+      }
 }
 
 
@@ -84,11 +101,14 @@ export async function CreateDescription (formData:FormData) {
     const guestNumber = formData.get("guest") as string;
     const roomNumber = formData.get("room") as string;
     const bathroomNumber = formData.get("bathroom") as string;
+
+
     
-    const {data: imageData} = await supabase.storage.from("images").upload(`${imageFile.name}-${new Date()}`,imageFile, {
-        cacheControl:"259200",
-        contentType:"image/png",
-    })
+const { data: imageData } = await supabase.storage.from("images").upload(`${imageFile.name}-${new Date()}`, imageFile, {
+    cacheControl: "2592000",
+    contentType: imageFile.type,
+});
+
 
     const data = await prisma.home.update({
         where: {
@@ -108,5 +128,20 @@ export async function CreateDescription (formData:FormData) {
     });
 
     return redirect(`/create/${homeId}/address`);
+}
 
+
+export async function createLocation (formData:FormData) {
+    const homeId = formData.get("homeId") as string;
+    const countryValue = formData.get("countryValue") as string;
+    const data = await prisma.home.update({
+        where: {
+            id:homeId,
+        },
+        data:{
+            addedLocation: true,
+            country:countryValue,
+        }
+    })
+    return redirect("/")
 }
