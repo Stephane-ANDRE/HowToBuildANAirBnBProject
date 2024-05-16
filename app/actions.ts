@@ -3,7 +3,7 @@
 import prisma from "./lib/db";
 import { redirect } from "next/navigation";
 import { supabase } from "./lib/supabase";
-import path from "path";
+import { revalidatePath } from "next/cache";
 
 export async function createAirChezBibiHome({ userId }: { userId: string }) {
     const data = await prisma.home.findFirst({
@@ -50,28 +50,26 @@ export async function CreateDescription(formData: FormData) {
     const price = formData.get("price");
     const imageFile = formData.get("image") as File;
     const homeId = formData.get("homeId") as string;
-
+  
     const guestNumber = formData.get("guest") as string;
     const roomNumber = formData.get("room") as string;
-    const bathroomNumber = formData.get("bathroom") as string;
-
+    const bathroomsNumber = formData.get("bathroom") as string;
+  
     const { data: imageData } = await supabase.storage
-    .from("images")
-    .upload(`${imageFile.name}-${new Date()}`, imageFile, {
-      cacheControl: "2592000",
-      contentType: "image/png",
-    });
+      .from("images")
+      .upload(`${imageFile.name}-${new Date()}`, imageFile, {
+        cacheControl: "2592000",
+        contentType: "image/png",
+      });
 
-    console.log("Image Data:", imageData); 
-
-    await prisma.home.update({
+    const data = await prisma.home.update({
         where: { id: homeId },
         data: {
             title,
             description,
             price: Number(price),
             bedrooms: roomNumber,
-            bathrooms: bathroomNumber,
+            bathrooms: bathroomsNumber,
             guests: guestNumber,
             photo: imageData?.path,
             addedDescription: true,
@@ -94,4 +92,34 @@ export async function createLocation(formData: FormData) {
     });
 
     return redirect("/");
+}
+
+
+export async function addToFavorite(formData:FormData) {
+    const homeId = formData.get("homeId") as string;
+    const userId = formData.get("userId") as string;
+    const pathName = formData.get("pathName") as string;
+
+
+    const data = await prisma.favorite.create({
+        data: {
+            homeId:homeId,
+            userId:userId,
+        }
+    });
+    revalidatePath(pathName)
+}
+
+export async function deleteFromFavorite (formData:FormData) {
+   const favoriteid = formData.get("favoriteId") as string;
+   const pathName = formData.get("pathName") as string;
+   const userId = formData.get("userId") as string;
+
+    const data = await prisma.favorite.delete({
+        where: {
+            id: favoriteid,
+            userId: userId,
+        }
+    });
+    revalidatePath(pathName);
 }

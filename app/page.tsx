@@ -4,11 +4,15 @@ import { ListingCard } from "@/components/ListingCard";
 import { Suspense } from "react";
 import { SkeletonCard } from "@/components/SkeletonCard";
 import { NoItems } from "@/components/NoItem";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 
 async function getData({
   searchParams,
-} :{searchParams?:{
+  userId
+} :{
+  userId: string | undefined,
+  searchParams?:{
   filter?:string;
 };
 }){
@@ -24,7 +28,14 @@ async function getData({
       id: true,
       price: true,
       description: true,
-      country:true
+      country:true,
+      Favorite: {
+        where: {
+          userId:userId ?? undefined,
+        }
+        
+
+      }
     },
   });
   return data;
@@ -54,7 +65,9 @@ async function ShowItems ({
   filter?:string;
 };
 }) {
-  const data = await getData({searchParams: searchParams});
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  const data = await getData({ searchParams: searchParams, userId: user?.id });
   return (
   <>
   {data.length === 0 ? (
@@ -66,7 +79,13 @@ async function ShowItems ({
       description={item.description as string}
       imagePath={item.photo as string}
       price={item.price as number}
-      location={item.country as string}/>
+      location={item.country as string}
+      userId={user?.id}
+      favoriteId={item.Favorite[0]?.id}
+      isInFavoriteList= {item.Favorite.length > 0 ? true : false}
+      homeId={item?.id}
+      pathName="/"
+      />
     ))}
   </div>
   )}
