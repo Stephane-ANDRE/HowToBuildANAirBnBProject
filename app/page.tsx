@@ -71,7 +71,10 @@ async function ShowItems ({
   return (
   <>
   {data.length === 0 ? (
-    <NoItems />
+    <NoItems 
+    description="Mais guette les autres catégories... ou propose ta case 😚" 
+    title="Na point la caze  a ter là 😔" 
+    />
   ):(
     <div className="grid lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-8">
     {data.map((item) => (

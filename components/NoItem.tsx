@@ -1,7 +1,14 @@
-import { File } from "lucide-react";
+import { File, FileQuestion } from "lucide-react";
+
+interface IappProps {
+    title: string;
+    description: string;
+}
 
 
-export function NoItems() {
+
+
+export function NoItems({description, title}: IappProps) {
     return (
         <div className="
         flex
@@ -18,11 +25,11 @@ export function NoItems() {
         fade-in-50
         mt-10">
             <div className=" flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-                <File className="h-10 w-10 text-primary" />
+                <FileQuestion className="h-10 w-10 text-primary" />
             </div>
             <div>
-                <h2 className="mt-6 text-xl font-semibold"> Na point la caze  a ter là 😔</h2>
-                <p className="mt-2 text-center text-sm leading-6 text-muted-foreground"> Mais guette les autres catégories... ou propose ta case 😚</p>
+                <h2 className="mt-6 text-xl font-semibold">{title}</h2>
+                <p className="mt-2 text-center text-sm leading-6 text-muted-foreground"> {description} </p>
             </div>
 
         </div>

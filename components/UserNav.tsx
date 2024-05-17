@@ -45,12 +45,12 @@ export async function UserNav () {
                          <DropdownMenuItem>
                          <form action={createHomeWithId} className="w-full">
                             <button type="submit" className="w-full text-start">
-                                AirchezBibi..: ta caze
+                                AirchezBibi..ta caze
                             </button>
                          </form>
                          </DropdownMenuItem>
                          <DropdownMenuItem>
-                         <Link href="/my-homes" className="w-full">Mes envies
+                         <Link href="/my-homes" className="w-full">Mes cazes
                          </Link>
                          </DropdownMenuItem>
                          <DropdownMenuItem>
