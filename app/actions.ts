@@ -142,12 +142,15 @@ export async function createReservation(formData:FormData) {
     return redirect("/");
 }
 
-export async function deleteReservation(reservationId: string) {
-    await prisma.reservation.delete({
+export async function cancelReservation(formData: FormData) {
+    const reservationId = formData.get("reservationId") as string;
+
+    const data = await prisma.reservation.delete({
         where: {
-            id: reservationId
+            id: reservationId,
         }
     });
 
     return redirect("/");
-    }
+}
+

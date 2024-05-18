@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { CreateDescription } from "@/app/actions";
 import { Counter } from "@/components/Counter";
 import CreationBottomBar from "@/components/CreationBottomBar";
@@ -11,12 +12,15 @@ export default function DescriptionPage({
     params,
   }: {
     params: { id: string };
-  }) {
+  })
+  
+  {
+    
     return (
       <>
         <div className="w-3/5 mx-auto">
           <h2 className="text-3xl font-semibold tracking-tight transition-colors">
-            Please describe your home as good as you can!
+            Décris ta caze comme jamais !!
           </h2>
         </div>
   
@@ -24,31 +28,31 @@ export default function DescriptionPage({
           <input type="hidden" name="homeId" value={params.id} />
           <div className="mx-auto w-3/5 mt-10 flex flex-col gap-y-5 mb-36">
             <div className="flex flex-col gap-y-2">
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">Titre</Label>
               <Input
                 name="title"
                 type="text"
                 required
-                placeholder="Short and simple..."
+                placeholder="Une accroche courte ..."
               />
             </div>
 
            <div className="flex flex-col gap-y-2">
-            <Label>Descrption</Label>
+            <Label>Description</Label>
             <Textarea
               name="description"
               required
-              placeholder="Please describe your home..."
+              placeholder="Décris ta caze..."
             />
           </div>
   
             <div className="flex flex-col gap-y-2">
-              <Label>Price</Label>
+              <Label>Prix</Label>
               <Input
                 name="price"
                 type="number"
                 required
-                placeholder="Price per Night in USD"
+                placeholder="prix par nuit en €"
                 min={10}
               />
             </div>
@@ -62,9 +66,9 @@ export default function DescriptionPage({
               <CardHeader className="flex flex-col gap-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <h3 className="underline font-medium">Guests</h3>
+                    <h3 className="underline font-medium">Invité</h3>
                     <p className="text-muted-foreground text-sm">
-                      How many guests do you want?
+                    Le nombre d'invités maximum
                     </p>
                   </div>
   
@@ -72,9 +76,9 @@ export default function DescriptionPage({
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <h3 className="underline font-medium">Rooms</h3>
+                    <h3 className="underline font-medium">Chambre</h3>
                     <p className="text-muted-foreground text-sm">
-                      How many rooms do you have?
+                    Nombre de chambres
                     </p>
                   </div>
   
@@ -82,9 +86,9 @@ export default function DescriptionPage({
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
-                    <h3 className="underline font-medium">Bathrooms</h3>
+                    <h3 className="underline font-medium">Salle de bain</h3>
                     <p className="text-muted-foreground text-sm">
-                      How many bathrooms do you have?
+                    Nombre de salles de bains
                     </p>
                   </div>
   

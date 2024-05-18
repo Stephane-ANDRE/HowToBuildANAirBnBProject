@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { createCategoryPage } from "@/app/actions";
 import CreationBottomBar from "@/components/CreationBottomBar";
 import { SelectedCategory } from "@/components/SelectedCategory";
@@ -12,7 +13,7 @@ export default function StructureRoute({params}: {params:{id:string}}) {
             font-semibold
             tracking-tight
             transition-colors">
-            Qu'est-ce qui correspond au mieux à ton logement?
+            Qu'est-ce qui correspond au mieux à ta caze?
             </h2>
         </div>
         <form action={createCategoryPage}>
