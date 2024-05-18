@@ -32,7 +32,8 @@ export default function DescriptionPage({
                 placeholder="Short and simple..."
               />
             </div>
-            <div className="flex flex-col gap-y-2">
+
+           <div className="flex flex-col gap-y-2">
             <Label>Descrption</Label>
             <Textarea
               name="description"
