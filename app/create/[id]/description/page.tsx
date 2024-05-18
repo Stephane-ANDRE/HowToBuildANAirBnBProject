@@ -33,13 +33,13 @@ export default function DescriptionPage({
               />
             </div>
             <div className="flex flex-col gap-y-2">
-              <Label>Descrption</Label>
-              <Textarea
-                name="description"
-                required
-                placeholder="Please describe your home..."
-              />
-            </div>
+            <Label>Descrption</Label>
+            <Textarea
+              name="description"
+              required
+              placeholder="Please describe your home..."
+            />
+          </div>
   
             <div className="flex flex-col gap-y-2">
               <Label>Price</Label>

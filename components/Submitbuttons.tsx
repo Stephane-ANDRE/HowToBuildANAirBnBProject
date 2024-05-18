@@ -54,4 +54,20 @@ export function DeleteFromFavoriteButton () {
                 ) }
                 </>
     )
+};
+
+export function ReservationSubmitButton () {
+    const {pending} = useFormStatus ()
+
+    return (
+        <>
+        {pending ? (
+            <Button className="w-full" disabled>
+                <Loader2 className="h-4 w-4 animate-spin mr-2"/> Patiente l'ami(e)...
+            </Button>
+        ): (
+            <Button className="w-full" type="submit">Faites une réservation !</Button>
+        )}
+        </>
+    )
 }
