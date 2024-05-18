@@ -141,3 +141,13 @@ export async function createReservation(formData:FormData) {
 
     return redirect("/");
 }
+
+export async function deleteReservation(reservationId: string) {
+    await prisma.reservation.delete({
+        where: {
+            id: reservationId
+        }
+    });
+
+    return redirect("/");
+    }

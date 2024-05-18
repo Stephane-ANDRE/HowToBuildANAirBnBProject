@@ -71,3 +71,20 @@ export function ReservationSubmitButton () {
         </>
     )
 }
+
+export function CancelReservationButton() {
+    const { pending } = useFormStatus();
+    return (
+        <>
+            {pending ? (
+                <Button className="w-full" disabled>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" /> Annulation en cours...
+                </Button>
+            ) : (
+                <Button className="w-full" type="submit">
+                    Annuler la réservation
+                </Button>
+            )}
+        </>
+    );
+}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import DesktopLogo from "../../airchezbibi/public/logo-desktop.png";
 import MobileLogo from "../../airchezbibi/public/logo-mobile.webp";
 import { UserNav } from "./UserNav";
+import { SearchBarModelComponent } from "./SearchBarComponent";
 
 export function Navbar () {
     return (
@@ -20,9 +21,7 @@ export function Navbar () {
                     <Image src={DesktopLogo} alt="Desktop AirChezBibi logo" className="w-32 hidden lg:block" />
                     <Image src={MobileLogo} alt="Mobile AirChezBibi logo" className="block lg:hidden w-12"/>
                </Link>
-               <div className="rounded-full border px-5 py-2">
-                    <h1>Hello from search</h1>
-               </div>
+               <SearchBarModelComponent />
                <UserNav />
             </div>
         </nav>
