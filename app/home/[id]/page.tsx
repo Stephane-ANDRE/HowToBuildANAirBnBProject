@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+// Imports
 import { createReservation } from "@/app/actions";
 import prisma from "@/app/lib/db";
 import { useCountries } from "@/app/lib/getCountries";
@@ -13,102 +14,132 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
-async function getData(homeId:string) {
+// Function to fetch data for a specific home
+async function getData(homeId: string) {
     const data = await prisma.home.findUnique({
         where: {
-            id:homeId,
+            id: homeId,
         },
         select: {
             photo: true,
             description: true,
-            guests:true,
-            bedrooms:true,
-            bathrooms:true,
-            title:true,
-            categoryName:true,
-            price:true,
-            country:true,
+            guests: true,
+            bedrooms: true,
+            bathrooms: true,
+            title: true,
+            categoryName: true,
+            price: true,
+            country: true,
             Reservation: {
                 where: {
-                    homeId:homeId,
+                    homeId: homeId,
                 }
             },
             User: {
-                select:{
-                    profileImage:true,
-                    firstname:true
+                select: {
+                    profileImage: true,
+                    firstname: true
                 }
             }
         },
     });
 
     return data;
-};
+}
 
-export default  async function HomeRoute ({params,}:{params:{id: string}}) {
-
+// Default function for the HomeRoute component
+export default async function HomeRoute({ params }: { params: { id: string } }) {
+    // Fetch data for the specified home
     const data = await getData(params.id);
-    const {getCountryByValue} = useCountries()
-    const country = getCountryByValue(data?.country as string)
-    const {getUser}= getKindeServerSession()
-    const user = await getUser()
 
+    // Get country data using the useCountries hook
+    const { getCountryByValue } = useCountries();
+    const country = getCountryByValue(data?.country as string);
+
+    // Get user data using the getKindeServerSession hook
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
+
+    // Render the component
     return (
         <div className="w-[75%] mx-auto mt-10 mb-12">
+            {/* Home title */}
             <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
+
+            {/* Image of the home */}
             <div className="relative h-[550px]">
                 <Image 
                     alt="Image of home" 
                     src={`https://xghgqaavcxcqszppdaxs.supabase.co/storage/v1/object/public/images/${data?.photo}`}
                     fill 
                     className="rounded-lg h-full object-cover w-full"
-                    />
+                />
             </div>
-                <div className="flex justify-between gap-4-24 mt-8">
-                    <div className="w-2/3">
-                        <h2 className="text-xl font-medium">
+
+            {/* Details about the home */}
+            <div className="flex justify-between gap-4-24 mt-8">
+                <div className="w-2/3">
+                    {/* Country flag, label, and region */}
+                    <h2 className="text-xl font-medium">
                         {country?.flag} {country?.label} / {country?.region}
-                        </h2>
-                            <div className="flex gap-x-2 text-muted-foreground">
-                                <p>{data?.guests} invité(s)</p> *<p>{data?.bedrooms} chambre(s)</p> *<p>{data?.bathrooms} salle(s) de bain</p> 
-                            </div>
-                                <div className="flex items-center mt-6">
-                                    <img src={data?.User?.profileImage ?? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"} 
-                                    alt="profil user image"
-                                    className="w-11 h-11 rounded-full" />
-                                    <div className="flex flex-col ml-4 ">
-                                        <h3 className="font-medium"> Hôte: {data?.User?.firstname}</h3>
-                                    </div>
-                                    </div>
+                    </h2>
 
-<Separator className="my-7" />
+                    {/* Guest, bedroom, and bathroom details */}
+                    <div className="flex gap-x-2 text-muted-foreground">
+                        <p>{data?.guests} guest(s)</p> * <p>{data?.bedrooms} bedroom(s)</p> * <p>{data?.bathrooms} bathroom(s)</p> 
+                    </div>
 
-<CategoryShowcase categoryName={data?.categoryName as string} />
+                    {/* Host information */}
+                    <div className="flex items-center mt-6">
+                        <img 
+                            src={data?.User?.profileImage ?? "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"} 
+                            alt="profil user image"
+                            className="w-11 h-11 rounded-full" 
+                        />
+                        <div className="flex flex-col ml-4 ">
+                            <h3 className="font-medium"> Host: {data?.User?.firstname}</h3>
+                        </div>
+                    </div>
 
-<Separator className="my-7" />
+                    {/* Separator */}
+                    <Separator className="my-7" />
 
-<p className="text-muted-foreground">{data?.description}</p>
+                    {/* Category showcase */}
+                    <CategoryShowcase categoryName={data?.categoryName as string} />
 
-<Separator className="my-7" />
+                    {/* Separator */}
+                    <Separator className="my-7" />
 
-<HomeMap locationValue={country?.value as string} />
-</div>
-                    <form action={createReservation}>
+                    {/* Description */}
+                    <p className="text-muted-foreground">{data?.description}</p>
+
+                    {/* Separator */}
+                    <Separator className="my-7" />
+
+                    {/* Home map */}
+                    <HomeMap locationValue={country?.value as string} />
+                </div>
+
+                {/* Reservation form */}
+                <form action={createReservation}>
+                    {/* Hidden input fields for homeId and userId */}
                     <input  type="hidden" name="homeId" value={params.id} />
                     <input  type="hidden" name="userId" value={user?.id} />
-                    <SelectCalendar reservation={data?.Reservation}/>
 
+                    {/* Calendar for selecting reservation dates */}
+                    <SelectCalendar reservation={data?.Reservation} />
+
+                    {/* Render ReservationSubmitButton if user is logged in, otherwise render login link */}
                     {user?.id ? (
                         <ReservationSubmitButton />
-                    ): (
+                    ) : (
                         <Button className="w-full" asChild>
-                            <Link href="/api/auth/login"> Faites une réservation
+                            <Link href="/api/auth/login"> Make a reservation
                             </Link>
                         </Button>
                     )}
-                    </form>
-                    
-                </div>
+                </form>
+            </div>
         </div>
     )
 }

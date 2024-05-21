@@ -1,27 +1,36 @@
 /* eslint-disable react/no-unescaped-entities */
+
+// Import necessary modules and components
 import { createCategoryPage } from "@/app/actions";
 import CreationBottomBar from "@/components/CreationBottomBar";
 import { SelectedCategory } from "@/components/SelectedCategory";
 
-
+// Define the StructureRoute component
 export default function StructureRoute({params}: {params:{id:string}}) {
     return (
         <>
-        <div className="w-3/5 mx-auto">
-            <h2 
-            className="text-3xl
-            font-semibold
-            tracking-tight
-            transition-colors">
-            Qu'est-ce qui correspond au mieux à ta caze?
-            </h2>
-        </div>
-        <form action={createCategoryPage}>
-        <input type="hidden" name="homeId" value={params.id} />
-            <SelectedCategory />
-          
-            <CreationBottomBar />
-        </form>
+            {/* Title Section */}
+            <div className="w-3/5 mx-auto">
+                <h2 
+                className="text-3xl
+                font-semibold
+                tracking-tight
+                transition-colors">
+                What best fits your house?
+                </h2>
+            </div>
+
+            {/* Form Section */}
+            <form action={createCategoryPage}>
+                {/* Hidden input field to store homeId */}
+                <input type="hidden" name="homeId" value={params.id} />
+
+                {/* SelectedCategory component */}
+                <SelectedCategory />
+              
+                {/* Bottom bar for navigation */}
+                <CreationBottomBar />
+            </form>
         </>
     )
 }

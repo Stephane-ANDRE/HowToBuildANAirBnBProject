@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-"use client"
-
+"use client";
 
 import { Search } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
@@ -13,112 +12,127 @@ import { CreationSubmit } from "./Submitbuttons";
 import { Card, CardHeader } from "./ui/card";
 import { Counter } from "./Counter";
 
+/**
+ * Component for the search bar model.
+ */
+export function SearchBarModelComponent() {
+    // State for managing the current step and selected location value
+    const [step, setStep] = useState(1);
+    const [locationValue, setLocationValue] = useState("");
 
-export function SearchBarModelComponent () {
-    const [step, setStep] = useState(1)
-    const [locationValue, setLocationValue] = useState("")
+    // Custom hook to fetch all countries
+    const { getAllCountries } = useCountries();
 
-    const {getAllCountries} = useCountries()
-
+    /**
+     * Renders the appropriate submit button based on the current step.
+     * @returns The submit button component.
+     */
     function SubmitButtonLocal() {
-        if(step === 1) {
+        if (step === 1) {
             return (
-                <Button onClick={() => setStep(step +1)} type="button">Suivant</Button>
+                <Button onClick={() => setStep(step + 1)} type="button">Next</Button>
             );
-        } else if(step === 2) {
+        } else if (step === 2) {
             return <CreationSubmit />;
         }
     }
 
-    return(
+    return (
         <Dialog>
+            {/* Trigger element for the dialog */}
             <DialogTrigger asChild>
                 <div className="rounded-full py-2 px-5 border flex items-center cursor-pointer">
-                    <div className=" flex h-full divide-x font-medium">
-                        <p className="px-4">N'importe où</p>
-                        <p className="px-4">N'importe quand</p>
-                        <p className="px-4">Avec qui vous voulez</p>
+                    <div className="flex h-full divide-x font-medium">
+                        <p className="px-4">Anywhere</p>
+                        <p className="px-4">Anytime</p>
+                        <p className="px-4">With whoever you want</p>
                     </div>
-                            <Search className="bg-primary text-white p-1 h-8 w-8 rounded-full" />
+                    <Search className="bg-primary text-white p-1 h-8 w-8 rounded-full" />
                 </div>
             </DialogTrigger>
-            <DialogContent className="sm: max-w-[425px]">
+            {/* Content of the dialog */}
+            <DialogContent className="sm:max-w-[425px]">
                 <form className="gap-4 flex flex-col">
-                    <input type="hidden"name="country" value={locationValue}/>
+                    {/* Hidden input field to store selected country */}
+                    <input type="hidden" name="country" value={locationValue} />
+                    {/* Conditionally render content based on the current step */}
                     {step === 1 ? (
+                        // Step 1 content: Select country
                         <>
-                        <DialogHeader>
-                            <DialogTitle> Choisis un pays</DialogTitle>
-                            <DialogDescription> Choisis un pays pour voir les cases disponibles</DialogDescription>
-                        </DialogHeader>
-
-                        <Select required onValueChange={(value) => setLocationValue(value)} value={locationValue}>
-                        <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Choisis un pays" />
-                        </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectLabel>
-                                        Pays
-                                    </SelectLabel>
-                                    {getAllCountries().map((country)=>(
-                                        <SelectItem key={country.value} value={country.value}>
-                                            {country.flag} {country.label} / {country.region}
-                                        </SelectItem>
-                                    ))}
-                                </SelectGroup>
-                            </SelectContent>
-                    </Select>
-                    <HomeMap locationValue={locationValue}/>
+                            <DialogHeader>
+                                <DialogTitle>Choose a country</DialogTitle>
+                                <DialogDescription>Choose a country to see available homes</DialogDescription>
+                            </DialogHeader>
+                            {/* Dropdown for selecting country */}
+                            <Select required onValueChange={(value) => setLocationValue(value)} value={locationValue}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Choose a country" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel>Country</SelectLabel>
+                                        {/* Render options for each country */}
+                                        {getAllCountries().map((country) => (
+                                            <SelectItem key={country.value} value={country.value}>
+                                                {country.flag} {country.label} / {country.region}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                            {/* Render the map component */}
+                            <HomeMap locationValue={locationValue} />
                         </>
-                    ): (
+                    ) : (
+                        // Step 2 content: Select information
                         <>
-                        <DialogHeader>
-                            <DialogTitle> Sélectionne les informations</DialogTitle>
-                            <DialogDescription> Parmi la liste suivante</DialogDescription>
-                        </DialogHeader>
-                        <Card>
-              <CardHeader className="flex flex-col gap-y-5">
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <h3 className="underline font-medium">Invités</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Le nombre d'invités maximum
-                    </p>
-                  </div>
-  
-                  <Counter name="guest" />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <h3 className="underline font-medium">Chambres</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Nombre de chambres
-                    </p>
-                  </div>
-  
-                  <Counter name="room" />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <h3 className="underline font-medium">Salle de bain</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Nombre de salles de bains
-                    </p>
-                  </div>
-  
-                  <Counter name="bathroom" />
-                </div>
-              </CardHeader>
-            </Card>
+                            <DialogHeader>
+                                <DialogTitle>Select the information</DialogTitle>
+                                <DialogDescription>From the following list</DialogDescription>
+                            </DialogHeader>
+                            {/* Card component for selecting guests, rooms, and bathrooms */}
+                            <Card>
+                                <CardHeader className="flex flex-col gap-y-5">
+                                    {/* Counter component for selecting number of guests */}
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex flex-col">
+                                            <h3 className="underline font-medium">Guests</h3>
+                                            <p className="text-muted-foreground text-sm">
+                                                Maximum number of guests
+                                            </p>
+                                        </div>
+                                        <Counter name="guest" />
+                                    </div>
+                                    {/* Counter component for selecting number of rooms */}
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex flex-col">
+                                            <h3 className="underline font-medium">Rooms</h3>
+                                            <p className="text-muted-foreground text-sm">
+                                                Number of rooms
+                                            </p>
+                                        </div>
+                                        <Counter name="room" />
+                                    </div>
+                                    {/* Counter component for selecting number of bathrooms */}
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex flex-col">
+                                            <h3 className="underline font-medium">Bathrooms</h3>
+                                            <p className="text-muted-foreground text-sm">
+                                                Number of bathrooms
+                                            </p>
+                                        </div>
+                                        <Counter name="bathroom" />
+                                    </div>
+                                </CardHeader>
+                            </Card>
                         </>
                     )}
+                    {/* Footer section with submit button */}
                     <DialogFooter>
                         <SubmitButtonLocal />
                     </DialogFooter>
                 </form>
-
             </DialogContent>
         </Dialog>
-    )
+    );
 }

@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 
-export default function LayoutCreation({children}:{children:ReactNode}) {
+// Define the LayoutCreation component
+export default function LayoutCreation({ children }: { children: ReactNode }) {
     return (
-        <div className="mt-10">{children}
-
+        // Render children inside a div with top margin
+        <div className="mt-10">
+            {children}
         </div>
-    )
+    );
 }

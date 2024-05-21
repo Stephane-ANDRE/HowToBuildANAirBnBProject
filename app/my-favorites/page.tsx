@@ -1,10 +1,11 @@
-
+// Import necessary modules and components
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import prisma from "../lib/db"
+import prisma from "../lib/db";
 import { redirect } from "next/navigation";
 import { NoItems } from "@/components/NoItem";
 import { ListingCard } from "@/components/ListingCard";
 
+// Function to retrieve favorite data for a given user
 async function getData(userId:string) {
     const data = await prisma?.favorite.findMany({
         where: {
@@ -19,52 +20,63 @@ async function getData(userId:string) {
                     price: true,
                     country: true,
                     description:true,
+                }
             }
         }
-    }
-});
-return data;
+    });
+    return data;
 }
 
+// Default export for the FavoriteRoute component
 export default async function FavoriteRoute () {
-    const {getUser}= getKindeServerSession()
+    // Get user session data
+    const { getUser } = getKindeServerSession();
     const user = await getUser(); 
-    if (!user) return redirect("/")
-    const data = await getData(user.id)
-return(
-    <section className="container mx-auto px-5 lg:px-10 mt-10">
-        <h2 className="text-3xl font-semibold tracking-tight"> Tes cases préférées</h2>
-{data.length === 0 ? (
-    <NoItems 
-    title="Bah na point de favories?? 🧐"
-    description="Bah rajout, fais toi plaisir 🥳"
-    />
-):(
-    <div className="
-    grid
-    lg:grid-cols-4
-    sm:grid-cols-2
-    md:grid-cols-3
-    grid-cols-1
-    gap-8
-    mt-8">
-        {data.map((item) => (
-            <ListingCard 
-            key={item.Home?.id}
-            description={item.Home?.description as string}
-            location={item.Home?.country as string}
-            pathName="/my-favorites"
-            homeId={item.Home?.id as string}
-            imagePath={item.Home?.photo as string}
-            price={item.Home?.price as number}
-            userId={user.id}
-            favoriteId={item.Home?.Favorite[0].id as string}
-            isInFavoriteList={item.Home?.Favorite.length as number > 0 ? true : false
-            } 
-            />
-        ))}
-    </div>
-)}
-    </section>
-)
-};
+
+    // Redirect to homepage if user is not authenticated
+    if (!user) return redirect("/");
+
+    // Retrieve favorite data for the authenticated user
+    const data = await getData(user.id);
+
+    // Render favorite listings section
+    return (
+        <section className="container mx-auto px-5 lg:px-10 mt-10">
+            <h2 className="text-3xl font-semibold tracking-tight"> Your Favorite Homes</h2>
+            {/* Check if there are no favorite items */}
+            {data.length === 0 ? (
+                <NoItems 
+                    title="No favorites yet? 🧐"
+                    description="Add some favorites and enjoy 🥳"
+                />
+            ) : (
+                // Render the list of favorite listings
+                <div className="
+                    grid
+                    lg:grid-cols-4
+                    sm:grid-cols-2
+                    md:grid-cols-3
+                    grid-cols-1
+                    gap-8
+                    mt-8">
+                    {data.map((item) => (
+                        <ListingCard 
+                            key={item.Home?.id}
+                            description={item.Home?.description as string}
+                            location={item.Home?.country as string}
+                            pathName="/my-favorites"
+                            homeId={item.Home?.id as string}
+                            imagePath={item.Home?.photo as string}
+                            price={item.Home?.price as number}
+                            userId={user.id}
+                            favoriteId={item.Home?.Favorite[0].id as string}
+                            isInFavoriteList={item.Home?.Favorite.length as number > 0 ? true : false} 
+                            hasReservation={false} 
+                            reservationId={""} 
+                        />
+                    ))}
+                </div>
+            )}
+        </section>
+    );
+}
