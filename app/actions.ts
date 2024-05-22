@@ -5,6 +5,9 @@ import prisma from "./lib/db";
 import { redirect } from "next/navigation";
 import { supabase } from "./lib/supabase";
 import { revalidatePath } from "next/cache";
+import path from "path";
+import {v4 as uuidv4} from "uuid";
+
 
 // Function to create a new home entry for a user
 export async function createAirChezBibiHome({ userId }: { userId: string }) {
@@ -52,10 +55,9 @@ export async function createCategoryPage(formData: FormData) {
     });
     return redirect(`/create/${homeId}/description`);
 }
-
 // Function to handle creating description page
 export async function CreateDescription(formData: FormData) {
-     // Extract form data
+    // Extract form data
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const price = formData.get("price");
@@ -64,34 +66,44 @@ export async function CreateDescription(formData: FormData) {
     const guestNumber = formData.get("guest") as string;
     const roomNumber = formData.get("room") as string;
     const bathroomsNumber = formData.get("bathroom") as string;
+    
     console.log("Starting image upload...");
+    console.log("image", imageFile);
+
+    // Generate a unique ID for the image
+    const uniqueImageId = uuidv4();
+    const imagePath = `${uniqueImageId}`;
   
-// Upload image to Supabase storage
-    const { data: imageData } = await supabase.storage
-    .from("images")
-    .upload(`${imageFile.name}-${new Date()}`, imageFile, {
-      cacheControl: "2592000",
-      contentType: "image/png",
+    // Upload image to Supabase storage
+    const { data: imageData, error }  = await supabase.storage
+        .from("images")
+        .upload(imagePath, imageFile, {
+            cacheControl: "2592000",
+            contentType: imageFile.type, 
+        });
+
+    console.log("imageUpload:", imageData);
+    console.log(error);
+    
+    // Update home entry with description data and mark description as added
+    const data = await prisma.home.update({
+        where: {
+            id: homeId,
+        },
+        data: {
+            title: title,
+            description: description,
+            price: Number(price),
+            bedrooms: roomNumber,
+            bathrooms: bathroomsNumber,
+            guests: guestNumber,
+            photo: imageData?.path,
+            addedDescription: true,
+        },
     });
 
-    // Update home entry with description data and mark description as added
-  const data = await prisma.home.update({
-    where: {
-      id: homeId,
-    },
-    data: {
-      title: title,
-      description: description,
-      price: Number(price),
-      bedrooms: roomNumber,
-      bathrooms: bathroomsNumber,
-      guests: guestNumber,
-      photo: imageData?.path,
-      addedDescription: true,
-    },
-  });
-
-  return redirect(`/create/${homeId}/address`);
+    console.log("datas", data);
+    return redirect(`/create/${homeId}/address`);
 }
       
 // Function to handle creating location page

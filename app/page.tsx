@@ -6,6 +6,7 @@ import { SkeletonCard } from "@/components/SkeletonCard";
 import { NoItems } from "@/components/NoItem";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
+
 // Asynchronous function to fetch data based on search parameters and user ID
 async function getData({
   searchParams,
