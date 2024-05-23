@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 // Import modules and components:
 // Importing category items
-import { categoryItems } from "../app/lib/categoryItems"; 
+import { categoryItems } from "@/app/lib/categoryItems"; 
 // Next.js component for optimizing images
 import Image from "next/image";
 // Next.js component for client-side navigation 

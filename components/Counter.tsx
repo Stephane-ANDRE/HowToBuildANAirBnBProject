@@ -1,7 +1,7 @@
 "use client"
 
 import { Minus, Plus } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 // This component creates a simple counter with increment and decrement functionality.

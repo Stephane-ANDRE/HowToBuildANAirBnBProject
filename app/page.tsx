@@ -1,5 +1,5 @@
 import { MapFilterItems } from "@/components/MapFilterItems";
-import prisma from "./lib/db";
+import prisma from "@/app/lib/db";
 import { ListingCard } from "@/components/ListingCard";
 import { Suspense } from "react";
 import { SkeletonCard } from "@/components/SkeletonCard";

@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import DesktopLogo from "@/public/logo-desktop.png";
 import MobileLogo from "@/public/logo-mobile.webp";
-import { UserNav } from "./UserNav";
-import { SearchBarModelComponent } from "./SearchBarComponent";
+import { UserNav } from "@/components/UserNav";
+import { SearchBarModelComponent } from "@/components/SearchBarComponent";
 
 // Navbar component representing the navigation bar
 export function Navbar() {

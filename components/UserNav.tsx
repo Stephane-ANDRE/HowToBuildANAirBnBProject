@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */ // Disabling eslint rule for img elements
 
 import { MenuIcon } from "lucide-react"; // Importing MenuIcon from lucide-react
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"; // Importing dropdown menu components
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"; // Importing dropdown menu components
 import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components"; // Importing authentication components
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"; // Importing server-side session utility
 import Link from "next/link"; // Importing Link component from Next.js

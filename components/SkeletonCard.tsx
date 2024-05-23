@@ -1,4 +1,4 @@
-import { Skeleton } from "./ui/skeleton"; // Importing Skeleton component
+import { Skeleton } from "@/components/ui/skeleton"; // Importing Skeleton component
 
 /**
  * Component for rendering a skeleton loading card.

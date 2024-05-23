@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // This component represents a dynamic loading map component for the home page.
 export function HomeMap({ locationValue }: { locationValue: string }) {

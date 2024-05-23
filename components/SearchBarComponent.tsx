@@ -2,15 +2,15 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from "./ui/select";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from "@/components/ui/select";
 import { useCountries } from "@/app/lib/getCountries";
-import { HomeMap } from "./HomeMap";
-import { Button } from "./ui/button";
-import { CreationSubmit } from "./Submitbuttons";
-import { Card, CardHeader } from "./ui/card";
-import { Counter } from "./Counter";
+import { HomeMap } from "@/components/HomeMap";
+import { Button } from "@/components/ui/button";
+import { CreationSubmit } from "@/components/Submitbuttons";
+import { Card, CardHeader } from "@/components/ui/card";
+import { Counter } from "@/components/Counter";
 
 /**
  * Component for the search bar model.

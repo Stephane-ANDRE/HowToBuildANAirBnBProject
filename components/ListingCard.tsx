@@ -1,7 +1,7 @@
 import { useCountries } from "@/app/lib/getCountries";
 import Image from "next/image";
 import Link from "next/link";
-import { AddToFavoriteButton, DeleteFromFavoriteButton, CancelReservationButton } from "./Submitbuttons";
+import { AddToFavoriteButton, DeleteFromFavoriteButton, CancelReservationButton } from "@/components/Submitbuttons";
 import { addToFavorite, deleteFromFavorite, cancelReservation } from "@/app/actions";
 
 // Interface defining the props for the ListingCard component

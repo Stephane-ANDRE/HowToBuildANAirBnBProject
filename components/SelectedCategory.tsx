@@ -1,7 +1,7 @@
 "use client";
 
 import { categoryItems } from "@/app/lib/categoryItems"; // Importing categoryItems data
-import { Card, CardHeader } from "./ui/card"; // Importing Card and CardHeader components
+import { Card, CardHeader } from "@/components/ui/card"; // Importing Card and CardHeader components
 import Image from "next/image"; // Importing Image component from Next.js
 import { useState } from "react"; // Importing useState hook from React
 
