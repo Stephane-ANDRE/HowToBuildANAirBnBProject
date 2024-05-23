@@ -42,7 +42,7 @@ export default async function FavoriteRoute () {
     // Render favorite listings section
     return (
         <section className="container mx-auto px-5 lg:px-10 mt-10">
-            <h2 className="text-3xl font-semibold tracking-tight"> Your Favorite Homes</h2>
+            <h2 className="text-3xl font-semibold tracking-tight"> Tes cazes favories</h2>
             {/* Check if there are no favorite items */}
             {data.length === 0 ? (
                 <NoItems 

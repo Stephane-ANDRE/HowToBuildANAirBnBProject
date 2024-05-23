@@ -70,7 +70,7 @@ export async function CreateDescription(formData: FormData) {
     console.log("Starting image upload...");
     console.log("image", imageFile);
 
-    // Generate a unique ID for the image
+    // Generate a unique name for the image (usually we use uuidv for Id but here it's for the name of the image)
     const uniqueImageId = uuidv4();
     const imagePath = `${uniqueImageId}`;
   

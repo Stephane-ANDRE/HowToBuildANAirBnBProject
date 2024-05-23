@@ -16,7 +16,7 @@ export default function StructureRoute({params}: {params:{id:string}}) {
                 font-semibold
                 tracking-tight
                 transition-colors">
-                What best fits your house?
+                Qu'est-ce qui correspont le mieux à ta caze?
                 </h2>
             </div>
 

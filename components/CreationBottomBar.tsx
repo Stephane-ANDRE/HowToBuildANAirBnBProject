@@ -10,7 +10,7 @@ export default function CreationBottomBar() {
                 {/* Button to cancel the creation process */}
                 <Button variant="secondary" size="lg" asChild>
                     {/* Link to navigate back to the home page */}
-                    <Link href="/"> Cancel </Link>
+                    <Link href="/"> Annuler </Link>
                 </Button>
                 {/* Component to submit the creation */}
                 <CreationSubmit />

@@ -50,11 +50,11 @@ export default async function MyHomes() {
     // Render the user's homes section
     return (
         <section className="container mx-auto px-5 lg:px-10 mt-10">
-            <h2 className="text-3xl font-semibold tracking-tight">My Homes</h2>
+            <h2 className="text-3xl font-semibold tracking-tight">Tes cazes</h2>
 
             {/* Check if there are no homes */}
             {data.length === 0 ? (
-                <NoItems title="No homes registered yet 🥺" description="Add some... or have a bunch 🙃" />
+                <NoItems title="Pas de cazes encore enregistrées 🥺" description="Rajoutes en un.. ou deux... voire plus 🙃" />
             ) : (
                 // Render the list of user's homes
                 <div className="

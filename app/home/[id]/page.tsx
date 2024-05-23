@@ -86,7 +86,7 @@ export default async function HomeRoute({ params }: { params: { id: string } }) 
 
                     {/* Guest, bedroom, and bathroom details */}
                     <div className="flex gap-x-2 text-muted-foreground">
-                        <p>{data?.guests} guest(s)</p> * <p>{data?.bedrooms} bedroom(s)</p> * <p>{data?.bathrooms} bathroom(s)</p> 
+                        <p>{data?.guests} invité(s)</p> * <p>{data?.bedrooms} pièce(s)</p> * <p>{data?.bathrooms} salle(s) de bain(s)</p> 
                     </div>
 
                     {/* Host information */}
@@ -134,7 +134,7 @@ export default async function HomeRoute({ params }: { params: { id: string } }) 
                         <ReservationSubmitButton />
                     ) : (
                         <Button className="w-full" asChild>
-                            <Link href="/api/auth/login"> Make a reservation
+                            <Link href="/api/auth/login"> Faire une réservation
                             </Link>
                         </Button>
                     )}

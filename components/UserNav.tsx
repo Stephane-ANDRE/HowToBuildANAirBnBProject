@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */ // Disabling eslint rule for img elements
 
 import { MenuIcon } from "lucide-react"; // Importing MenuIcon from lucide-react

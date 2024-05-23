@@ -87,7 +87,7 @@ async function ShowItems({
     <>
       {data.length === 0 ? (
         <NoItems
-          description="Mais guette les autres catégories... ou propose ta case 😚"
+          description="Mais guette les autres catégories... ou propose ta caze 😚"
           title="Na point la caze  a ter là 😔"
         />
       ) : (

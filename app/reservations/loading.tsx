@@ -4,7 +4,7 @@ import { SkeletonCard } from "@/components/SkeletonCard";
 export default function FavoritesLoading () {
     return (
         <section className="container mx-auto px-5 lg:px-10 mt-10">
-        <h2 className="text-3xl font-semibold tracking-tight"> Tes cases préférées</h2>
+        <h2 className="text-3xl font-semibold tracking-tight"> Tes cazes réservées</h2>
         <div className="
                     grid
                     lg:grid-cols-4

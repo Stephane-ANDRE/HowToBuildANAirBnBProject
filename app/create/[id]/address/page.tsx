@@ -27,7 +27,7 @@ export default function AddressRoute({params}: {params:{id:string}}) {
         <>
         <div className="w-3/5 mx-auto mb-36">
             <h1 className="text-3xl font-semibold tracking-tight transition-colors mb-10">
-                Where is your beautiful house located?
+                Où se situe ta caze?
             </h1>
         </div>
         {/* Form to handle the location submission */}
@@ -44,7 +44,7 @@ export default function AddressRoute({params}: {params:{id:string}}) {
                         <SelectContent>
                             <SelectGroup>
                                 <SelectLabel>
-                                    Country
+                                    Pays
                                 </SelectLabel>
                                 {/* Map through the list of countries and create a SelectItem for each */}
                                 {getAllCountries().map((country) => (

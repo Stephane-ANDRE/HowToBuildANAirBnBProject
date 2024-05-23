@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useFormStatus } from "react-dom"; // Importing useFormStatus hook from react-dom
@@ -34,16 +35,19 @@ export function AddToFavoriteButton() {
     const { pending } = useFormStatus(); // Getting the pending status from useFormStatus hook
     return (
         <>
+        <div className="flex justify-end mb-3">
             {pending ? ( // Display loader if pending
-                <Button variant="outline" size="icon" disabled className="bg-primary-foreground">
+                <Button variant="outline" size="icon" disabled className="bg-primary-foreground mb-2">
                     <Loader2 className="h-4 w-4 animate-spin text-primary" />
                 </Button>
             ) : ( // Display regular button if not pending
-                <Button variant="outline" size="icon" className="bg-primary-foreground" type="submit">
+                <Button variant="outline" size="icon" className="bg-primary-foreground mb-2" type="submit">
                     <Heart className="w-4 h-4" />
                 </Button>
             )}
+            </div>
         </>
+        
     );
 }
 
@@ -55,15 +59,17 @@ export function DeleteFromFavoriteButton() {
     const { pending } = useFormStatus(); // Getting the pending status from useFormStatus hook
     return (
         <>
+        <div className="flex justify-end mb-3">
             {pending ? ( // Display loader if pending
-                <Button variant="outline" size="icon" disabled className="bg-primary-foreground">
+                <Button variant="outline" size="icon" disabled className="bg-primary-foreground mb-2">
                     <Loader2 className="h-4 w-4 animate-spin text-primary" />
                 </Button>
             ) : ( // Display regular button if not pending
-                <Button variant="outline" size="icon" className="bg-primary-foreground" type="submit">
+                <Button variant="outline" size="icon" className="bg-primary-foreground mb-2" type="submit">
                     <Heart className="w-4 h-4 text-primary" fill="#E21C49" />
                 </Button>
             )}
+            </div>
         </>
     );
 }
@@ -95,13 +101,17 @@ export function CancelReservationButton() {
     const { pending } = useFormStatus(); // Getting the pending status from useFormStatus hook
     return (
         <>
+        <div className="flex justify-end mb-3">
             {pending ? ( // Display loader if pending
-                <Button className="w-full" disabled>
+                <Button  className="w-full" disabled>
                     <Loader2 className="h-4 w-4 animate-spin mr-2" /> Annulation en cours...
                 </Button>
             ) : ( // Display regular button if not pending
-                <Button className="w-full" type="submit">Annuler la réservation</Button>
+                <Button className="w-full " type="submit">Annuler la réservation</Button>
             )}
+        </div>
         </>
     );
 }
+
+

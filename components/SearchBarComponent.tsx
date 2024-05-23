@@ -30,7 +30,7 @@ export function SearchBarModelComponent() {
     function SubmitButtonLocal() {
         if (step === 1) {
             return (
-                <Button onClick={() => setStep(step + 1)} type="button">Next</Button>
+                <Button onClick={() => setStep(step + 1)} type="button">Suivant</Button>
             );
         } else if (step === 2) {
             return <CreationSubmit />;
@@ -43,9 +43,9 @@ export function SearchBarModelComponent() {
             <DialogTrigger asChild>
                 <div className="rounded-full py-2 px-5 border flex items-center cursor-pointer">
                     <div className="flex h-full divide-x font-medium">
-                        <p className="px-4">Anywhere</p>
-                        <p className="px-4">Anytime</p>
-                        <p className="px-4">With whoever you want</p>
+                        <p className="px-4">Où tu veux</p>
+                        <p className="px-4">Quand tu veux</p>
+                        <p className="px-4">Avec qui tu veux</p>
                     </div>
                     <Search className="bg-primary text-white p-1 h-8 w-8 rounded-full" />
                 </div>
@@ -60,8 +60,8 @@ export function SearchBarModelComponent() {
                         // Step 1 content: Select country
                         <>
                             <DialogHeader>
-                                <DialogTitle>Choose a country</DialogTitle>
-                                <DialogDescription>Choose a country to see available homes</DialogDescription>
+                                <DialogTitle>Choisis un pays</DialogTitle>
+                                <DialogDescription>Choisis un pays pour voir les cases disponibles</DialogDescription>
                             </DialogHeader>
                             {/* Dropdown for selecting country */}
                             <Select required onValueChange={(value) => setLocationValue(value)} value={locationValue}>
@@ -70,7 +70,7 @@ export function SearchBarModelComponent() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectLabel>Country</SelectLabel>
+                                        <SelectLabel>Pays</SelectLabel>
                                         {/* Render options for each country */}
                                         {getAllCountries().map((country) => (
                                             <SelectItem key={country.value} value={country.value}>
@@ -87,8 +87,8 @@ export function SearchBarModelComponent() {
                         // Step 2 content: Select information
                         <>
                             <DialogHeader>
-                                <DialogTitle>Select the information</DialogTitle>
-                                <DialogDescription>From the following list</DialogDescription>
+                                <DialogTitle>Choisis les options</DialogTitle>
+                                <DialogDescription>De cette liste</DialogDescription>
                             </DialogHeader>
                             {/* Card component for selecting guests, rooms, and bathrooms */}
                             <Card>
@@ -96,9 +96,9 @@ export function SearchBarModelComponent() {
                                     {/* Counter component for selecting number of guests */}
                                     <div className="flex items-center justify-between">
                                         <div className="flex flex-col">
-                                            <h3 className="underline font-medium">Guests</h3>
+                                            <h3 className="underline font-medium">Invités</h3>
                                             <p className="text-muted-foreground text-sm">
-                                                Maximum number of guests
+                                                Nombre d'invités au maximum
                                             </p>
                                         </div>
                                         <Counter name="guest" />
@@ -106,9 +106,9 @@ export function SearchBarModelComponent() {
                                     {/* Counter component for selecting number of rooms */}
                                     <div className="flex items-center justify-between">
                                         <div className="flex flex-col">
-                                            <h3 className="underline font-medium">Rooms</h3>
+                                            <h3 className="underline font-medium">Pièces</h3>
                                             <p className="text-muted-foreground text-sm">
-                                                Number of rooms
+                                                Nombre de pièces
                                             </p>
                                         </div>
                                         <Counter name="room" />
@@ -116,9 +116,9 @@ export function SearchBarModelComponent() {
                                     {/* Counter component for selecting number of bathrooms */}
                                     <div className="flex items-center justify-between">
                                         <div className="flex flex-col">
-                                            <h3 className="underline font-medium">Bathrooms</h3>
+                                            <h3 className="underline font-medium">Salle de bain</h3>
                                             <p className="text-muted-foreground text-sm">
-                                                Number of bathrooms
+                                                Nombre de salle de bain
                                             </p>
                                         </div>
                                         <Counter name="bathroom" />

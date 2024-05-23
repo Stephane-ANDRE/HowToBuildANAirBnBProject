@@ -21,7 +21,7 @@ export default function DescriptionPage({
       {/* Title Section */}
       <div className="w-3/5 mx-auto">
         <h2 className="text-3xl font-semibold tracking-tight transition-colors">
-          Describe your house like never before!!
+          Décris ta caze comme jamais !!!
         </h2>
       </div>
 
@@ -32,12 +32,12 @@ export default function DescriptionPage({
 
           {/* Title Input */}
           <div className="flex flex-col gap-y-2">
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">Titre</Label>
             <Input
               name="title"
               type="text"
               required
-              placeholder="A short catchy title ..."
+              placeholder="Un titre accrocheur..."
             />
           </div>
 
@@ -47,18 +47,18 @@ export default function DescriptionPage({
             <Textarea
               name="description"
               required
-              placeholder="Describe your house..."
+              placeholder="Décris ta caze..."
             />
           </div>
 
           {/* Price Input */}
           <div className="flex flex-col gap-y-2">
-            <Label>Price</Label>
+            <Label>Prix</Label>
             <Input
               name="price"
               type="number"
               required
-              placeholder="price per night in €"
+              placeholder="prix par nuit en €"
               min={10}
             />
           </div>
@@ -76,9 +76,9 @@ export default function DescriptionPage({
               {/* Guests Counter */}
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
-                  <h3 className="underline font-medium">Guests</h3>
+                  <h3 className="underline font-medium">Invités</h3>
                   <p className="text-muted-foreground text-sm">
-                    Maximum number of guests
+                    Nombre d'invités au maximum
                   </p>
                 </div>
                 <Counter name="guest" />
@@ -87,9 +87,9 @@ export default function DescriptionPage({
               {/* Rooms Counter */}
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
-                  <h3 className="underline font-medium">Rooms</h3>
+                  <h3 className="underline font-medium">Pièces</h3>
                   <p className="text-muted-foreground text-sm">
-                    Number of rooms
+                    Nombre de pièces
                   </p>
                 </div>
                 <Counter name="room" />
@@ -98,9 +98,9 @@ export default function DescriptionPage({
               {/* Bathrooms Counter */}
               <div className="flex items-center justify-between">
                 <div className="flex flex-col">
-                  <h3 className="underline font-medium">Bathrooms</h3>
+                  <h3 className="underline font-medium">Salles de bains</h3>
                   <p className="text-muted-foreground text-sm">
-                    Number of bathrooms
+                    Nombre de salles de bains
                   </p>
                 </div>
                 <Counter name="bathroom" />
