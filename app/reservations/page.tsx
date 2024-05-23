@@ -4,9 +4,12 @@ import { NoItems } from "@/components/NoItem";
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
+//not keeping the cache
+import {unstable_noStore as noStore} from "next/cache";
 
 // Function to retrieve reservation data for a user
 async function getData(userId: string) {
+    noStore()
     const data = await prisma.reservation.findMany({
         where: {
             userId: userId

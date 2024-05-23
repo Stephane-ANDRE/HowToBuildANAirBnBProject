@@ -5,7 +5,8 @@ import { Suspense } from "react";
 import { SkeletonCard } from "@/components/SkeletonCard";
 import { NoItems } from "@/components/NoItem";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
+//in order to not keep the cache
+import {unstable_noStore as noStore} from "next/cache";
 
 // Asynchronous function to fetch data based on search parameters and user ID
 async function getData({
@@ -21,6 +22,8 @@ async function getData({
     bathroom?: string;
   };
 }) {
+  //no cache kept
+  noStore()
   // Query the database for homes that match the search criteria
   const data = await prisma.home.findMany({
     where: {

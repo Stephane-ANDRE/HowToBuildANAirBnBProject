@@ -4,9 +4,12 @@ import prisma from "../lib/db";
 import { redirect } from "next/navigation";
 import { NoItems } from "@/components/NoItem";
 import { ListingCard } from "@/components/ListingCard";
+//not keeping the cache
+import {unstable_noStore as noStore} from "next/cache";
 
 // Function to retrieve data for user's homes
 async function getData(userId:string) {
+    noStore()
     const data = await prisma?.home.findMany({
         where: {
             userId: userId,

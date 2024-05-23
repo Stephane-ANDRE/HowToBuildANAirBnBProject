@@ -4,9 +4,12 @@ import prisma from "../lib/db";
 import { redirect } from "next/navigation";
 import { NoItems } from "@/components/NoItem";
 import { ListingCard } from "@/components/ListingCard";
+//not keeping the cache
+import {unstable_noStore as noStore} from "next/cache";
 
 // Function to retrieve favorite data for a given user
 async function getData(userId:string) {
+    noStore()
     const data = await prisma?.favorite.findMany({
         where: {
             userId: userId,

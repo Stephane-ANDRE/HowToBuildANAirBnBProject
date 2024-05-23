@@ -1,8 +1,11 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/app/lib/db";
 import { NextResponse } from "next/server";
+//not keeping the cache
+import {unstable_noStore as noStore} from "next/cache";
 
 export async function GET () {
+    noStore()
     // Retrieve the user session using Kinde authentication
     const {getUser} = getKindeServerSession();
     const user = await getUser();

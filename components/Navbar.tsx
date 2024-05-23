@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import DesktopLogo from "../../airchezbibi/public/logo-desktop.png";
-import MobileLogo from "../../airchezbibi/public/logo-mobile.webp";
+import DesktopLogo from "@/public/logo-desktop.png";
+import MobileLogo from "@/public/logo-mobile.webp";
 import { UserNav } from "./UserNav";
 import { SearchBarModelComponent } from "./SearchBarComponent";
 

@@ -13,9 +13,12 @@ import { Separator } from "@/components/ui/separator";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
+//not keeping the cache
+import {unstable_noStore as noStore} from "next/cache";
 
 // Function to fetch data for a specific home
 async function getData(homeId: string) {
+    noStore()
     const data = await prisma.home.findUnique({
         where: {
             id: homeId,
