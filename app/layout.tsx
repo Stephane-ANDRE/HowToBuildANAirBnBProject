@@ -22,6 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/app/favicon.ico<generated>" sizes="32x32" />
       <body className={inter.className}>
         {/* Include the Navbar component */}
         <Navbar />
