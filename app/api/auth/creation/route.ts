@@ -36,5 +36,5 @@ export async function GET () {
     }
 
     // Redirect the user to the specified URL after processing
-    return NextResponse.redirect("http://localhost:3000");
+    return NextResponse.redirect("https://airchezbibi.vercel.app");
 }
