@@ -63,14 +63,14 @@ export default async function HomeRoute({ params }: { params: { id: string } }) 
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    // Render the component
+   // Render the component
     return (
-        <div className="w-[75%] mx-auto mt-10 mb-12">
+        <div className="w-full max-w-6xl mx-auto mt-10 mb-12 px-4 sm:px-6 lg:px-8">
             {/* Home title */}
             <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
 
             {/* Image of the home */}
-            <div className="relative h-[550px]">
+            <div className="relative h-60 sm:h-80 md:h-96 lg:h-[550px]">
                 <Image 
                     alt="Image of home" 
                     src={`https://rpqcqnwjqgsjvtpsqtok.supabase.co/storage/v1/object/public/images/${data?.photo}`}
@@ -80,15 +80,15 @@ export default async function HomeRoute({ params }: { params: { id: string } }) 
             </div>
 
             {/* Details about the home */}
-            <div className="flex justify-between gap-4-24 mt-8">
-                <div className="w-2/3">
+            <div className="flex flex-col lg:flex-row justify-between gap-8 mt-8">
+                <div className="w-full lg:w-2/3">
                     {/* Country flag, label, and region */}
                     <h2 className="text-xl font-medium">
                         {country?.flag} {country?.label} / {country?.region}
                     </h2>
 
                     {/* Guest, bedroom, and bathroom details */}
-                    <div className="flex gap-x-2 text-muted-foreground">
+                    <div className="flex gap-x-2 text-muted-foreground mt-2">
                         <p>{data?.guests} invité(s)</p> * <p>{data?.bedrooms} pièce(s)</p> * <p>{data?.bathrooms} salle(s) de bain(s)</p> 
                     </div>
 
@@ -99,7 +99,7 @@ export default async function HomeRoute({ params }: { params: { id: string } }) 
                             alt="profil user image"
                             className="w-11 h-11 rounded-full" 
                         />
-                        <div className="flex flex-col ml-4 ">
+                        <div className="flex flex-col ml-4">
                             <h3 className="font-medium"> Host: {data?.User?.firstname}</h3>
                         </div>
                     </div>
@@ -124,7 +124,7 @@ export default async function HomeRoute({ params }: { params: { id: string } }) 
                 </div>
 
                 {/* Reservation form */}
-                <form action={createReservation}>
+                <form action={createReservation} className="w-full lg:w-1/3">
                     {/* Hidden input fields for homeId and userId */}
                     <input  type="hidden" name="homeId" value={params.id} />
                     <input  type="hidden" name="userId" value={user?.id} />
@@ -144,5 +144,5 @@ export default async function HomeRoute({ params }: { params: { id: string } }) 
                 </form>
             </div>
         </div>
-    )
+    );
 }

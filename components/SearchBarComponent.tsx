@@ -43,15 +43,15 @@ export function SearchBarModelComponent() {
             <DialogTrigger asChild>
                 <div className="rounded-full py-2 px-5 border flex items-center cursor-pointer">
                     <div className="flex h-full divide-x font-medium">
-                        <p className="px-4">Oussa?</p>
-                        <p className="px-4">Kansa?</p>
-                        <p className="px-4">ek ki?</p>
+                        <p className="px-1 py-2 text-center ">Ou?</p>
+                        <p className="px-1 py-2 text-center sm:text-sm">Kansa?</p>
+                        <p className="px-1 py-2 text-center sm:text-sm">ek ki?</p>
                     </div>
-                    <Search className="bg-primary text-white p-1 h-8 w-8 rounded-full" />
+                    <Search className="bg-primary text-white p-1 h-6 w-6 sm:h-8 sm:w-8 rounded-full" />
                 </div>
             </DialogTrigger>
             {/* Content of the dialog */}
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="w-full sm:max-w-[425px]">
                 <form className="gap-4 flex flex-col">
                     {/* Hidden input field to store selected country */}
                     <input type="hidden" name="country" value={locationValue} />
